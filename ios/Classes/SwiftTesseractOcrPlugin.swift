@@ -1,8 +1,10 @@
 import Flutter
 import UIKit
 import SwiftyTesseract
+import libtesseract
 
 public class SwiftTesseractOcrPlugin: NSObject, FlutterPlugin {
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "tesseract_ocr", binaryMessenger: registrar.messenger())
         let instance = SwiftTesseractOcrPlugin()
@@ -27,7 +29,7 @@ public class SwiftTesseractOcrPlugin: NSObject, FlutterPlugin {
             let  imagePath = params["imagePath"] as! String
             guard let image = UIImage(contentsOfFile: imagePath)else { return }
             
-            swiftyTesseract.performOCR(on: image) { recognizedString in
+            swiftyTesseract.performOCRSingleChar(on: image) { recognizedString in
                 
                 guard let extractText = recognizedString else { return }
                 result(extractText)

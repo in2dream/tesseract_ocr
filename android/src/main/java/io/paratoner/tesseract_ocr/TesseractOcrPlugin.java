@@ -35,7 +35,7 @@ public class TesseractOcrPlugin implements MethodCallHandler {
       final TessBaseAPI baseApi = new TessBaseAPI();
       baseApi.init(tessDataPath, DEFAULT_LANGUAGE);
       final File tempFile = new File(imagePath);
-      baseApi.setPageSegMode(DEFAULT_PAGE_SEG_MODE);
+      baseApi.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SINGLE_CHAR);
 
       Thread t = new Thread(new MyRunnable(baseApi, tempFile, recognizedText, result));
       t.start();
